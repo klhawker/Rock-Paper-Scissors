@@ -28,6 +28,12 @@ function playRound(computerSelection, playerSelection) {
         return 'Draw!';
     }
 }
-let comp_choice = getComputerChoice();
-let player_choice = getPlayerChoice();
-playRound(comp_choice, player_choice);
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        let comp_choice = getComputerChoice();
+        let player_choice = getPlayerChoice();
+        window.alert( playRound(comp_choice, player_choice));
+      }
+}
+game();
