@@ -1,0 +1,26 @@
+body{
+    height: 100vh;
+    background-color: rgb(86, 86, 86);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+
+button{
+    height: 100px;
+    width: 100px;
+    font-size: 75px;
+    border-radius: 100px;
+    background-color: transparent;
+    border: none;
+}
+
+.result{
+    font-size: 30px;
+}

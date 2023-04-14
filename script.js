@@ -5,12 +5,6 @@ function getComputerChoice() {
     return computer_choice;
 }
 
-function getPlayerChoice() {
-    let selection = prompt('Choose Rock, Paper or Scissors: ');
-    selection.toLowerCase();
-    return selection
-}
-
 function playRound(computerSelection, playerSelection) {
     if (playerSelection == 'rock' && computerSelection =='scissors') {
         return 'Rock beats scissors, player wins!';
@@ -29,11 +23,13 @@ function playRound(computerSelection, playerSelection) {
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let comp_choice = getComputerChoice();
-        let player_choice = getPlayerChoice();
-        window.alert( playRound(comp_choice, player_choice));
-      }
+function game(playerChoice) {
+    let result_div = document.getElementsByClassName('result')[0];
+    result_div.innerHTML = ""; //reset the results div text
+
+    let compChoice = getComputerChoice();
+    let result = playRound(compChoice, playerChoice);
+    
+    result_div.insertAdjacentText('afterbegin', result);
 }
 game();

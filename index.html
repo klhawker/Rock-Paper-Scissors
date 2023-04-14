@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./styles.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
     <h1>Rock Paper Scissors</h1>
-    <h3 id="rpc"></h3>
+    <div class="container">
+        <button onclick="game('rock')">&#129704;</button>
+        <button onclick="game('paper')">&#9995;</button>
+        <button onclick="game('scissors')">&#9986;</button>
+    </div>
+    <div class="result"></div>
 </body>
 </html>
