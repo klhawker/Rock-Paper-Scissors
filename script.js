@@ -1,35 +1,62 @@
-function getComputerChoice() {
-    let arr_rpc = ['rock', 'paper', 'scissors'];
-    let random_int = Math.floor(Math.random() * 3);
-    let computer_choice = arr_rpc[random_int];
-    return computer_choice;
+let playerScore = 0;
+let computerScore = 0;
+let rounds = 0;
+
+function computerPlay() {
+    const choices = ['rock', 'paper', 'scissors'];
+    return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function playRound(computerSelection, playerSelection) {
-    if (playerSelection == 'rock' && computerSelection =='scissors') {
-        return 'Rock beats scissors, player wins!';
-    } else if (playerSelection == 'rock' && computerSelection =='paper'){
-        return 'Paper beats rock, computer wins!';
-    } else if (playerSelection == 'paper' && computerSelection =='rock'){
-        return 'Paper beats rock, players wins!';
-    } else if (playerSelection == 'paper' && computerSelection =='scissors'){
-        return 'Scissors beats paper, computer wins!';
-    } else if (playerSelection == 'scissors' && computerSelection =='paper'){
-        return 'Scissors beats paper, player wins!';
-    } else if (playerSelection == 'scissors' && computerSelection =='rock'){
-        return 'Rock beats scissors, computer wins!';
-    } else if (playerSelection == computerSelection){
-        return 'Draw!';
+function playRound(playerSelection) {
+    if (playerScore >= 5 || computerScore >= 5) return;
+
+    const computerSelection = computerPlay();
+    let result;
+
+    if (playerSelection === computerSelection) {
+        result = "It's a tie!";
+    } else if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+    ) {
+        playerScore++;
+        result = `You win! ${playerSelection} beats ${computerSelection}.`;
+    } else {
+        computerScore++;
+        result = `You lose! ${computerSelection} beats ${playerSelection}.`;
+    }
+    
+    document.getElementById('player-score').textContent = `Player: ${playerScore}`;
+    document.getElementById('computer-score').textContent = `Computer: ${computerScore}`;
+    document.getElementById('result').textContent = result;
+    rounds++;
+
+    if (playerScore === 5 || computerScore === 5) {
+        document.getElementById('restart').style.display = 'block';
+        declareWinner();
     }
 }
 
-function game(playerChoice) {
-    let result_div = document.getElementsByClassName('result')[0];
-    result_div.innerHTML = ""; //reset the results div text
-
-    let compChoice = getComputerChoice();
-    let result = playRound(compChoice, playerChoice);
-    
-    result_div.insertAdjacentText('afterbegin', result);
+function declareWinner() {
+    let winner;
+    if (playerScore > computerScore) {
+        winner = "You are the winner!";
+    } else if (playerScore < computerScore) {
+        winner = "Computer is the winner!";
+    } else {
+        winner = "It's a tie!";
+    }
+    document.getElementById('result').textContent = `${winner} Final Score: Player ${playerScore} - Computer ${computerScore}`;
 }
-game();
+
+function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    rounds = 0;
+
+    document.getElementById('player-score').textContent = 'Player: 0';
+    document.getElementById('computer-score').textContent = 'Computer: 0';
+    document.getElementById('result').textContent = '';
+    document.getElementById('restart').style.display = 'none';
+}
